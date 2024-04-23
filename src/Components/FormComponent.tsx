@@ -1,11 +1,10 @@
-// InputTaskComponent.tsx
 import React, { useState } from "react";
 
 interface InputTaskProps {
   onSubmit: (value: string) => void;
 }
 
-const InputTaskComponent: React.FC<InputTaskProps> = ({ onSubmit }) => {
+const FormComponent: React.FC<InputTaskProps> = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState<string>('');
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -22,16 +21,16 @@ const InputTaskComponent: React.FC<InputTaskProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="taskContent">Tarefa: </label>
+      <label htmlFor="taskContent">Adicionar nova tarefa: </label>
       <input
         type="text"
         id="taskContent"
         value={inputValue}
         onChange={(el) => handleChange(el.target.value)}
-      /><br />
-      <button type="submit">Salvar</button>
+      />
+      <button type="submit" className="btn saveBtn">Salvar</button>
     </form>
   );
 };
 
-export default InputTaskComponent;
+export default FormComponent;

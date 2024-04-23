@@ -1,0 +1,104 @@
+@import url('buttons.css');
+@import url('Layout.css');
+
+.scrollLock{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+@keyframes show {
+  from {
+    left: -100%;
+    opacity: 0;
+  }
+
+  to {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+.show {
+  animation: show 1s ease-in-out forwards;
+}
+
+@keyframes sidebarHidde {
+  from {
+    left: 0;
+    opacity: 1;
+  }
+
+  to {
+    left: -100%;
+    opacity: 0;
+  }
+}
+
+.sidebarHidde {
+  animation: sidebarHidde 1s ease-in-out forwards;
+}
+
+@keyframes invisible {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.invisible {
+  animation: invisible 1s ease-in-out forwards;
+}
+
+@keyframes visible {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.visible {
+  animation: visible 1s ease-in-out forwards;
+}
+
+@media (min-width: 768px) {
+  .sidebarHidde {
+    animation: none;
+  }
+
+  .mobileSidebar {
+    display: none;
+  }
+
+  .navBtn {
+    display: none;
+  }
+
+  header {
+    justify-content: center;
+  }
+
+  .desktopSidebar {
+    display: block;
+  }
+}
+
+@media (max-width: 425px) {
+  tbody>tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  form {
+    display: grid;
+    gap: 10px;
+  }
+}

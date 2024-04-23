@@ -1,15 +1,35 @@
-// TaskListComponent.tsx
 import React from "react";
 
 interface Task {
   text: string;
+  data: Date;
+  done: boolean;
+  id: number
 }
 
 interface TaskListProps {
   tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
-const TaskListComponent: React.FC<TaskListProps> = ({ tasks }) => {
+const TaskList: React.FC<TaskListProps> = ({ tasks, setTasks }) => {
+
+  const handleDelete = (index: number) => {
+    console.log(index)
+    setTasks(prevTasks => prevTasks.filter((task) => task.id !== index));
+  };
+
+  const markDone = (index: number) => {
+    const updatedTasks = tasks.map(task => {
+      if (task.id === index) {
+        return {...task, done: !task.done};
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  };
+
+
   return (
     <div className="taskList">
       <table>
@@ -19,9 +39,24 @@ const TaskListComponent: React.FC<TaskListProps> = ({ tasks }) => {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task, index) => (
-            <tr key={index}>
-              <td>{task.text}</td>
+          {tasks.map((task) => (
+            <tr key={task.id} className={task.done ? "doneTask" : ""}>
+              <td>{task.text}
+                <div className="taskBtn">
+                  <button
+                    className={"btn " + (task.done ? "undoneBtn" : "doneBtn")}
+                    onClick={() => markDone(task.id)}
+                  >
+                    {task.done ? "desfazer" : "Feita"}
+                  </button>
+                  <button
+                    className="btn deleteBtn"
+                    onClick={() => handleDelete(task.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
@@ -30,4 +65,4 @@ const TaskListComponent: React.FC<TaskListProps> = ({ tasks }) => {
   );
 };
 
-export default TaskListComponent;
+export default TaskList;
